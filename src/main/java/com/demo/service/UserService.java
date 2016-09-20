@@ -1,9 +1,6 @@
 package com.demo.service;
 
-import com.demo.dao.sqlcondition.CompareCondition;
-import com.demo.dao.sqlcondition.DescOrder;
-import com.demo.dao.sqlcondition.GreaterCondition;
-import com.demo.dao.sqlcondition.OrderCondition;
+import com.demo.dao.sqlcondition.*;
 import com.demo.util.PageBean;
 import com.demo.dao.UserDao;
 import com.demo.entity.User;
@@ -25,12 +22,16 @@ public class UserService {
     }
     public List<User> findAll(PageBean... pager){
         List<OrderCondition> order=new ArrayList<OrderCondition>();
-        List<CompareCondition> compare=new ArrayList<CompareCondition>();
         DescOrder descOrder=new DescOrder("id");
-        GreaterCondition greaterCondition=new GreaterCondition("id",20);
         order.add(0, descOrder);
-        compare.add(0,greaterCondition);
-        return userDao.findAll(order,pager);
+
+        ConditionAndSet conditionAndSet=new ConditionAndSet();
+        conditionAndSet.addCompareCondition(new GreaterCondition("id",1));
+        conditionAndSet.addCompareCondition(new LessThanCondition("id",5));
+        ConditionOrSet conditionOrSet=new ConditionOrSet();
+        conditionOrSet.addConditionSet(conditionAndSet);
+        conditionOrSet.addCompareCondition(new EqualCondition("username","123"));
+        return userDao.findByProperties(conditionOrSet,order,pager);
     }
     public void add(User user){
         userDao.save(user);

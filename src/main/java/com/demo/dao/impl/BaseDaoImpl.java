@@ -44,17 +44,15 @@ public  abstract class BaseDaoImpl<T> implements BaseDao<T>  {
 
     /**
      * 保存对象
-     * @param object
-     *            T
+     * @param object 待保存的对象
      */
     public void save(T object) {
         hibernateTemplate.save(object);
     }
     /**
-     * 保存对象
+     * merge对象
      *
-     * @param object
-     *            T
+     * @param object 待merge的对象
      */
     public T merge(T object) {
         return (T) hibernateTemplate.merge(object);
@@ -62,8 +60,7 @@ public  abstract class BaseDaoImpl<T> implements BaseDao<T>  {
     /**
      * 删除对象
      *
-     * @param object
-     *            T
+     * @param object 待删除的对象
      */
     public void delete(T object) {
         hibernateTemplate.delete(object);
@@ -82,9 +79,8 @@ public  abstract class BaseDaoImpl<T> implements BaseDao<T>  {
     /**
      * 根据ID查找
      *
-     * @param id
-     *            Serializable
-     * @return T
+     * @param id 对象id
+     * @return 对应的对象或null
      */
     public T findById(Serializable id) {
         return (T)hibernateTemplate.get(entityClass, id);
@@ -92,8 +88,7 @@ public  abstract class BaseDaoImpl<T> implements BaseDao<T>  {
     /**
      * 保存或更新(如果对象已存在)
      *
-     * @param object
-     *            T
+     * @param object 待保存或更新的对象
      */
     public void saveOrUpdate(T object) {
         hibernateTemplate.saveOrUpdate(object);
@@ -101,8 +96,7 @@ public  abstract class BaseDaoImpl<T> implements BaseDao<T>  {
     /**
      * 批量删除
      *
-     * @param objects
-     *            Collection
+     * @param objects 待删除的对象集合
      */
     public void deleteBatch(Collection<T> objects) {
         hibernateTemplate.deleteAll(objects);
@@ -124,9 +118,8 @@ public  abstract class BaseDaoImpl<T> implements BaseDao<T>  {
     /**
      * 查找所有对象
      *
-     * @param pageParam
-     *            Integer[] 分页查找参数，开始页，与最大记录条数
-     * @return Collection
+     * @param pageParam 分页查找参数，开始页，与最大记录条数
+     * @return 查找到的所有对象
      */
     public List<T> findAll(PageBean... pageParam) {
         return findAll(null, pageParam);
@@ -134,11 +127,9 @@ public  abstract class BaseDaoImpl<T> implements BaseDao<T>  {
     /**
      * 查找所有对象
      *
-     * @param orderByProperties
-     *            String[] 需要排序的属性名，按数组中先后顺序order by
-     * @param pageParam
-     *            Integer[] 分页查找参数，开始页，与最大记录条数
-     * @return Collection
+     * @param orderByProperties 需要排序的属性名，按数组中先后顺序order by
+     * @param pageParam 分页查找参数，开始页，与最大记录条数
+     * @return 查找到的所有对象
      */
     public List<T> findAll(final List<OrderCondition> orderByProperties, final PageBean... pageParam) {
         return (List) hibernateTemplate.execute(new HibernateCallback() {
@@ -152,10 +143,8 @@ public  abstract class BaseDaoImpl<T> implements BaseDao<T>  {
     /**
      * 查找和所给对象相似的所有对象，相似表示所给对象中非空的属性值相同的对象
      *
-     * @param example
-     *            C
-     * @param pageParam
-     *            Integer[] 分页查找参数，开始页，与最大记录条数
+     * @param example 给出的对象
+     * @param pageParam 分页查找参数，开始页，与最大记录条数
      * @return Collection
      */
     public List<T> findByExample(final T example, final PageBean... pageParam) {
@@ -200,12 +189,9 @@ public  abstract class BaseDaoImpl<T> implements BaseDao<T>  {
     /**
      * 根据属性查找,并指定排序列，属性对应的值可以支持含有like条件，
      *
-     * @param properties
-     *            Map
-     * @param orderByProperties
-     *            String[]
-     * @param pageParam
-     *            Integer[] 分页查找参数，开始页，与最大记录条数
+     * @param properties      条件属性
+     * @param orderByProperties     排序属性
+     * @param pageParam     分页查找参数，开始页，与最大记录条数
      * @return Collection
      */
     public List<T> findByProperties(final ConditionSet properties, final List<? extends OrderCondition> orderByProperties, final PageBean... pageParam) {

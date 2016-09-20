@@ -25,8 +25,6 @@ public class ConditionAndSet extends ConditionSet {
 
     /**
      * 静态构造方法
-     * @param key
-     * @param value
      * @return
      */
     public static ConditionAndSet newInstance() {
