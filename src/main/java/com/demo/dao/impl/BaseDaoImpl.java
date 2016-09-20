@@ -20,8 +20,9 @@ import java.lang.reflect.ParameterizedType;
 import java.util.*;
 
 /**
+ * DAO层基础实现, 主要采用HibernateTemplate实现. 各个具体的DAO通过继承此类来获得基本的CRUD功能
  * Created by Queric on 2016/7/29.
- */
+ **/
 public  abstract class BaseDaoImpl<T> implements BaseDao<T>  {
 
     @Autowired
