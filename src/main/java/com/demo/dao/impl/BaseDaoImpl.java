@@ -329,9 +329,8 @@ public  abstract class BaseDaoImpl<T> implements BaseDao<T>  {
                         pageParam[0].setRecordCount(count);
                     }
                     int start = pageParam[0].getCurrentPage() - 1;
-                    start = start >= 0 ? start : 0;
-                    query.setFirstResult(start * pageParam[0].getPageSize()).setMaxResults(
-                            pageParam[0].getPageSize());
+                    start = (start >= 0 ? start : 0);
+                    query.setFirstResult(start * pageParam[0].getPageSize()).setMaxResults(pageParam[0].getPageSize());
                 }
                 return query.list();
             }
