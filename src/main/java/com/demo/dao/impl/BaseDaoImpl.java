@@ -312,6 +312,14 @@ public  abstract class BaseDaoImpl<T> implements BaseDao<T>  {
         return this.queryByHQL(hql, params, null);
     }
 
+    /**
+     * 执行hql语句查询;hql语句中变量为?;参数为Map集合
+     * @param hql 要执行的hql语句
+     * @param queryParam 查询参数
+     * @param totalCountHql 计数hql语句
+     * @param pageParam 分页参数封装PageBean
+     * @return
+     */
     public List queryByHQL(final String hql, final Map<String, Object> queryParam, final String totalCountHql, final PageBean... pageParam) {
         return (List) hibernateTemplate.execute(new HibernateCallback() {
             public Object doInHibernate(Session session) throws HibernateException {
@@ -391,10 +399,10 @@ public  abstract class BaseDaoImpl<T> implements BaseDao<T>  {
             public Object doInHibernate(Session session) throws HibernateException {
 
                 Query query = session.createSQLQuery(sql);
-                // if (entityClass != Object.class) {
-                // 暂时注释掉这行
-                // ((SQLQuery)query).addEntity(entityClass);
-                // }
+                if (entityClass != Object.class) {
+                    //暂时注释掉这行
+                    ((SQLQuery)query).addEntity(entityClass);
+                }
                 if (queryParam != null) {
                     query = setParams(query, queryParam);
                 }
@@ -419,8 +427,7 @@ public  abstract class BaseDaoImpl<T> implements BaseDao<T>  {
     /**
      * 执行更新hql
      *
-     * @param hql
-     *            String
+     * @param hql 更新hql语句
      */
     public Integer executeUpdateHql(final String hql) {
         return (Integer) hibernateTemplate.execute(new HibernateCallback() {
