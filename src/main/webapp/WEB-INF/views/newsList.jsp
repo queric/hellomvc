@@ -12,6 +12,7 @@
     <table>
         <thead><tr><th>编号</th><th>标题</th><th>正文</th><th>时间</th><th>类别</th></tr></thead>
         <tbody>
+            <c:if test="${empty test}"><tr><td align="center" colspan="5">无数据！</td></tr></c:if>
             <c:forEach var="news" items="${test}">
                 <tr><td>${news.newsId}</td><td>${news.newsTitle}</td><td>${news.newsContent}</td><td>${news.uploadTime}</td><td>${news.newsCatgory.catgoryName}</td></tr>
             </c:forEach>

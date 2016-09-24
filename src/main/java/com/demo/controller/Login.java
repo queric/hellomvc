@@ -3,14 +3,9 @@ package com.demo.controller;
 import com.demo.entity.User;
 import com.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.SystemEnvironmentPropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -33,7 +28,7 @@ public class Login {
 
         System.out.println(username);
 
-        //userService.save(u);
+        //userService.save("");
         view.addObject("test","test");
         return "index";
     }
