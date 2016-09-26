@@ -26,12 +26,7 @@ public class UserService {
         order.add(0, descOrder);
 
 
-        ConditionAndSet conditionAndSet=new ConditionAndSet();
-        conditionAndSet.addCompareCondition(new GreaterCondition("id",1));
-        conditionAndSet.addCompareCondition(new LessThanCondition("id",5));
-        ConditionOrSet conditionOrSet=new ConditionOrSet();
-        conditionOrSet.addConditionSet(conditionAndSet);
-        conditionOrSet.addCompareCondition(new EqualCondition("username","123"));
+        ConditionOrSet conditionOrSet=new ConditionOrSet("21",1);
         return userDao.findByProperties(conditionOrSet,order,pager);
     }
     public void add(User user){

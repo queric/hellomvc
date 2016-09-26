@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateCallback;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.util.Assert;
-
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.*;
@@ -68,11 +67,15 @@ public  abstract class BaseDaoImpl<T> implements BaseDao<T>  {
     }
     /**
      * 更新对象
+     * @param object 待更新的对象
      */
     public void update(T object) {
         hibernateTemplate.update(object);
     }
-
+    /**
+     * 把指定的对象从缓冲中清除
+     * @param object 要清除的对象
+     */
     public void evict(T object) {
         hibernateTemplate.evict(object);
     }
@@ -103,14 +106,9 @@ public  abstract class BaseDaoImpl<T> implements BaseDao<T>  {
         hibernateTemplate.flush();
     }
     /**
-     * 批量保存或更新
-     *
-     * param objects
-     *            Collection
+     * 查找所有数据
+     * @return 查找到的所有对象
      */
-    /*public void saveOrUpdateAll(Collection<T> objects) {
-        hibernateTemplate.saveOrUpdateAll(objects);
-    }*/
     public List<T> findAll(){
         DetachedCriteria criteria = DetachedCriteria.forClass(entityClass);
         return (List<T>)this.hibernateTemplate.findByCriteria(criteria);
@@ -244,26 +242,13 @@ public  abstract class BaseDaoImpl<T> implements BaseDao<T>  {
      *            Integer[] 分页查找参数，开始页，与最大记录条数
      * @return Collection
      */
-    public T findUniqueByProperties(final ConditionSet properties, final List<OrderCondition> orderByProperties, final PageBean... pageParam) {
+    public T findUniqueByProperties(final ConditionSet properties) {
         return (T) hibernateTemplate.execute(new HibernateCallback() {
             public Object doInHibernate(Session session) throws HibernateException {
                 Criteria crit = convertProperties2Criteria(properties, session);
-                fillOrderByAndPageParam(crit, orderByProperties, pageParam);
                 return crit.uniqueResult();
             }
         });
-    }
-    /**
-     * 根据属性查找，属性对应的值可以支持含有like条件的value 。
-     *
-     * @param properties
-     *            Map
-     * @param pageParam
-     *            Integer[] 分页查找参数，开始页，与最大记录条数
-     * @return Collection
-     */
-    public T findUniqueByProperties(final ConditionSet properties, final PageBean... pageParam) {
-        return findUniqueByProperties(properties, null, pageParam);
     }
     /**
      * 根据属性查询记录个数
@@ -311,7 +296,6 @@ public  abstract class BaseDaoImpl<T> implements BaseDao<T>  {
     public List queryByHQL(final String hql, final Map<String, Object> params) {
         return this.queryByHQL(hql, params, null);
     }
-
     /**
      * 执行hql语句查询;hql语句中变量为?;参数为Map集合
      * @param hql 要执行的hql语句
@@ -344,7 +328,6 @@ public  abstract class BaseDaoImpl<T> implements BaseDao<T>  {
             }
         });
     }
-
     /**
      * 执行hql语句查询;hql语句中变量为?;根据动态参数顺序传入查询参数
      */
@@ -375,20 +358,7 @@ public  abstract class BaseDaoImpl<T> implements BaseDao<T>  {
                 if (queryParam != null) {
                     query = setParams(query, queryParam);
                 }
-                if (pageParam.length == 1 && pageParam[0] != null) {
-                    if (totalCountHql != null) { // 如果带了需要查询总数的sql，查询总数设置到pagebean中
-                        Query countQuery = session.createSQLQuery(totalCountHql);
-                        if (queryParam != null) {
-                            countQuery = setParams(countQuery, queryParam);
-                        }
-                        Integer count = Integer.parseInt(countQuery.uniqueResult() + "");
-                        pageParam[0].setRecordCount(count);
-                    }
-                    int start = pageParam[0].getCurrentPage() - 1;
-                    start = start >= 0 ? start : 0;
-                    query.setFirstResult(start * pageParam[0].getPageSize()).setMaxResults(
-                            pageParam[0].getPageSize());
-                }
+                fillQueryBySQLPageParam(session,query,queryParam,totalCountHql,pageParam);
                 return query.list();
             }
         });
@@ -406,23 +376,26 @@ public  abstract class BaseDaoImpl<T> implements BaseDao<T>  {
                 if (queryParam != null) {
                     query = setParams(query, queryParam);
                 }
-                if ( pageParam.length == 1 && pageParam[0] != null) {
-                    if (totalCountHql != null) { // 如果带了需要查询总数的sql，查询总数设置到pagebean中
-                        Query countQuery = session.createSQLQuery(totalCountHql);
-                        if (queryParam != null) {
-                            countQuery = setParams(countQuery, queryParam);
-                        }
-                        Integer count = Integer.parseInt(countQuery.uniqueResult() + "");
-                        pageParam[0].setRecordCount(count);
-                    }
-                    int start = pageParam[0].getCurrentPage() - 1;
-                    start = start >= 0 ? start : 0;
-                    query.setFirstResult(start * pageParam[0].getPageSize()).setMaxResults(
-                            pageParam[0].getPageSize());
-                }
+                fillQueryBySQLPageParam(session,query,queryParam,totalCountHql,pageParam);
                 return query.list();
             }
         });
+    }
+
+    private void fillQueryBySQLPageParam(Session session, Query query, Map<String, Object> queryParam, String totalCountHql, PageBean... pageParam){
+        if (pageParam.length == 1 && pageParam[0] != null) {
+            if (totalCountHql != null) { // 如果带了需要查询总数的sql，查询总数设置到pagebean中
+                Query countQuery = session.createSQLQuery(totalCountHql);
+                if (queryParam != null) {
+                    countQuery = setParams(countQuery, queryParam);
+                }
+                Integer count = Integer.parseInt(countQuery.uniqueResult() + "");
+                pageParam[0].setRecordCount(count);
+            }
+            int start = pageParam[0].getCurrentPage() - 1;
+            start = start >= 0 ? start : 0;
+            query.setFirstResult(start * pageParam[0].getPageSize()).setMaxResults(pageParam[0].getPageSize());
+        }
     }
     /**
      * 执行更新hql

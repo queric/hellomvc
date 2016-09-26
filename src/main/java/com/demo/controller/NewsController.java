@@ -2,6 +2,7 @@ package com.demo.controller;
 
 import com.demo.entity.News;
 import com.demo.entity.NewsCatgory;
+import com.demo.service.NewsCatgoryService;
 import com.demo.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,8 @@ import java.util.List;
 public class NewsController {
     @Autowired
     private NewsService newsService;
+    @Autowired
+    private NewsCatgoryService newsCatgoryService;
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView get(){
         ModelAndView mav=new ModelAndView("newsList");
@@ -34,8 +37,8 @@ public class NewsController {
         news.setNewsContent("dffffffffffffffffffffffffffffff");
         news.setUploadTime(new Date());
         NewsCatgory newsCatgory=new NewsCatgory();
-        newsCatgory.setCatgoryId(1);
-        newsCatgory.setCatgoryName("测试类别");
+        //newsCatgory.setCatgoryId(1);
+        newsCatgory.setCatgoryName("测试类别233");
         news.setNewsCatgory(newsCatgory);
         newsService.save(news);
         return "news";

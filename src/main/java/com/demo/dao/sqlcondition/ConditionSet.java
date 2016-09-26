@@ -1,5 +1,7 @@
 package com.demo.dao.sqlcondition;
 
+import org.springframework.util.Assert;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -11,7 +13,7 @@ import java.util.Set;
  * dao使用，用于衔接查询条件拼装和criteria生成
  *
  */
-public abstract class ConditionSet {
+public abstract class ConditionSet<T> {
 
     private static final long serialVersionUID = -110803228763256709L;
     private Set<Object> values = new HashSet<Object>();
@@ -19,7 +21,7 @@ public abstract class ConditionSet {
      * groupBy属性列
      */
     private List<String> groups = new ArrayList<String>();
-    
+
     public List<String> getGroups() {
         return groups;
     }
@@ -36,52 +38,59 @@ public abstract class ConditionSet {
     }
     
     public ConditionSet(String key, Object value) {
-        put(key, value);
+        this.addCompareCondition(new EqualCondition(key, value));
     }
     
     public ConditionSet(CompareCondition condition) {
         this.addCompareCondition(condition);
     }
-    
+
     /**
-     * put并返回当前map，可连续对map进行操作
-     * @param key
-     * @param value
-     * @return
+     * put一个EqualCondition并返回当前ConditionAndSet，可连续对此进行操作
+     * @param key 属性名
+     * @param value 属性值
+     * @return “与”条件集
      */
-    public final ConditionSet put(String key, Object value) {
-
-        if (value instanceof CompareCondition) {
-            this.addCompareCondition((CompareCondition) value);
-        } 
-        else if (value instanceof ConditionSet) {
-            this.addConditionSet((ConditionSet) value);
-        }
-        else {
-            this.addCompareCondition(new EqualCondition(key, value));
-        }        
-        return this;
+    public final T put(String key, Object value) {
+        this.addCompareCondition(new EqualCondition(key, value));
+        return (T)this;
     }
 
+    public final T put(CompareCondition compareCondition){
+        Assert.notNull(compareCondition, "添加CompareCondition类型不能为null");
+        this.addCompareCondition(compareCondition);
+        return (T)this;
+    }
 
-    public ConditionSet addCompareCondition(CompareCondition condition) {
+    public final T put(ConditionSet conditionSet){
+        Assert.notNull(conditionSet, "添加ConditionSet类型不能为null");
+        this.addConditionSet(conditionSet);
+        return (T)this;
+    }
+
+    private void addCompareCondition(CompareCondition condition) {
         values.add(condition);
-        return this;
     }
     
-    public ConditionSet addConditionSet(ConditionSet conditionSet) {
+    private void addConditionSet(ConditionSet conditionSet) {
         // 增加自己同类型时，自动打平合并
         if (this.getClass().equals(conditionSet.getClass())) {
-            for (Iterator<Object> it = conditionSet.getValues().iterator(); it
-                    .hasNext();) {
+            for (Iterator<Object> it = conditionSet.getValues().iterator(); it.hasNext();) {
                 Object obj = it.next();
-                this.put(null, obj);
+                if (obj instanceof CompareCondition) {
+                    this.addCompareCondition((CompareCondition) obj);
+                }
+                else if (obj instanceof ConditionSet) {
+                    this.addConditionSet((ConditionSet) obj);
+                }
+                else {
+                    throw new RuntimeException("ConditionSet中遇到了意外的Condition类型");
+                }
             }
         }
         else {
             values.add(conditionSet);
         }
-        return this;
     }
 
     /**

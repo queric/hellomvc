@@ -1,6 +1,10 @@
 package com.demo.service;
 
 import com.demo.dao.NewsDao;
+import com.demo.dao.sqlcondition.ConditionAndSet;
+import com.demo.dao.sqlcondition.ConditionFactory;
+import com.demo.dao.sqlcondition.ConditionOrSet;
+import com.demo.dao.sqlcondition.ConditionSet;
 import com.demo.entity.News;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +27,8 @@ public class NewsService {
     public List<News> findAll(){
         //Map<String,Object> params=new HashMap<String, Object>();
         //params.put("newsId",1);
-
-        return  newsDao.queryByHqlWithParams("from News where newsId>?",1);
+        ConditionOrSet conditionOrSet=ConditionFactory.or()
+                .put(ConditionFactory.greaterThan("newsId",1)).put(ConditionFactory.lessOrEqual("newsId",5));
+        return  newsDao.findByProperties(conditionOrSet);
     }
 }

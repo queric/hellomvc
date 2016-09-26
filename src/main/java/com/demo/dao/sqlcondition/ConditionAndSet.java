@@ -1,18 +1,16 @@
 package com.demo.dao.sqlcondition;
 
 
+import org.springframework.util.Assert;
 
 /**
- * 与关系的conditionmap
+ * “与”关系的ConditionSet
  *
  */
-public class ConditionAndSet extends ConditionSet {
+public class ConditionAndSet extends ConditionSet<ConditionAndSet> {
 
     private static final long serialVersionUID = -7785215850623407374L;
-    
 
-    
-    
     /**
      * 静态构造方法
      * @param key
@@ -45,5 +43,4 @@ public class ConditionAndSet extends ConditionSet {
     private ConditionAndSet(String key, Object value) {
         super(key, value);
     }
-
 }

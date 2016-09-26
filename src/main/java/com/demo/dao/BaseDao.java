@@ -93,8 +93,10 @@ public interface BaseDao<T> {
     /**
      * 根据属性查找，属性对应的值可以支持含有like条件，以及是sqlcondition下的条件对象。
      *
-     * @param properties
-     *            Map
+     * @param propertyName
+     *            String
+     * @param value
+     *            Object
      * @param pageParam
      *            Integer[] 分页查找参数，开始页，与最大记录条数
      * @return Collection
@@ -103,8 +105,10 @@ public interface BaseDao<T> {
     /**
      * 根据单个属性查找,并指定排序列，属性对应的值可以支持含有like，以及是sqlcondition下的对象。
      *
-     * @param properties
-     *            Map
+     * @param propertyName
+     *            String
+     * @param value
+     *            Object
      * @param orderByProperties
      *            OrderBy[] 需要排序的属性名，
      * @param pageParam
@@ -138,7 +142,7 @@ public interface BaseDao<T> {
     /**
      * 根据属性查找，属性对应的值可以支持含有like条件，如果是sqlcondition.Like的类型。
      *
-     * @param properties
+     * @param conditionSet
      *            Map
      * @param pageParam
      *            Integer[] 分页查找参数，开始页，与最大记录条数
@@ -150,23 +154,9 @@ public interface BaseDao<T> {
      *
      * @param properties
      *            Map
-     * @param orderByProperties
-     *            OrderBy[] 需要排序的属性名，
-     * @param pageParam
-     *            Integer[] 分页查找参数，开始页，与最大记录条数
      * @return Collection
      */
-    T findUniqueByProperties(ConditionSet properties, List<OrderCondition> orderByProperties, PageBean... pageParam);
-    /**
-     * 根据属性查找，属性对应的值可以支持含有like条件，如果是sqlcondition.Like的类型。
-     *
-     * @param properties
-     *            Map
-     * @param pageParam
-     *            Integer[] 分页查找参数，开始页，与最大记录条数
-     * @return Collection
-     */
-    T findUniqueByProperties(ConditionSet conditionSet, PageBean... pageParam);
+    T findUniqueByProperties(ConditionSet properties);
     /**
      * 根据属性查询记录个数
      * @param properties
@@ -189,7 +179,7 @@ public interface BaseDao<T> {
      *
      * @param hql
      *            String
-     * @param pageParam
+     * @param queryParam
      *            Integer[]
      * @return Collection
      */
@@ -229,7 +219,7 @@ public interface BaseDao<T> {
     /**
      * 执行更新的hql
      *
-     * @param nativeSql
+     * @param hql
      *            String
      */
     Integer executeUpdateHql(String hql);
