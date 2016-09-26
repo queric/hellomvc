@@ -13,7 +13,7 @@ import java.util.Set;
  * dao使用，用于衔接查询条件拼装和criteria生成
  *
  */
-public abstract class ConditionSet<T> {
+public abstract class ConditionSet {
 
     private static final long serialVersionUID = -110803228763256709L;
     private Set<Object> values = new HashSet<Object>();
@@ -51,21 +51,31 @@ public abstract class ConditionSet<T> {
      * @param value 属性值
      * @return “与”条件集
      */
-    public final T put(String key, Object value) {
+    public final ConditionSet put(String key, Object value) {
         this.addCompareCondition(new EqualCondition(key, value));
-        return (T)this;
+        return this;
     }
 
-    public final T put(CompareCondition compareCondition){
+    /**
+     * put一个CompareCondition并返回当前ConditionAndSet，可连续对此进行操作
+     * @param compareCondition
+     * @return
+     */
+    public final ConditionSet put(CompareCondition compareCondition){
         Assert.notNull(compareCondition, "添加CompareCondition类型不能为null");
         this.addCompareCondition(compareCondition);
-        return (T)this;
+        return this;
     }
 
-    public final T put(ConditionSet conditionSet){
+    /**
+     * put一个ConditionSet并返回当前ConditionAndSet，可连续对此进行操作
+     * @param conditionSet
+     * @return
+     */
+    public final ConditionSet put(ConditionSet conditionSet){
         Assert.notNull(conditionSet, "添加ConditionSet类型不能为null");
         this.addConditionSet(conditionSet);
-        return (T)this;
+        return this;
     }
 
     private void addCompareCondition(CompareCondition condition) {
@@ -84,7 +94,7 @@ public abstract class ConditionSet<T> {
                     this.addConditionSet((ConditionSet) obj);
                 }
                 else {
-                    throw new RuntimeException("ConditionSet中遇到了意外的Condition类型");
+                    throw new RuntimeException("待增加的ConditionSet中遇到了意外的Condition类型");
                 }
             }
         }

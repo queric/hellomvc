@@ -235,12 +235,8 @@ public  abstract class BaseDaoImpl<T> implements BaseDao<T>  {
      * 根据属性查找,并指定排序列，属性对应的值可以支持含有like条件，
      *
      * @param properties
-     *            Map
-     * @param orderByProperties
-     *            String[]
-     * @param pageParam
-     *            Integer[] 分页查找参数，开始页，与最大记录条数
-     * @return Collection
+     *            ConditionSet
+     * @return T
      */
     public T findUniqueByProperties(final ConditionSet properties) {
         return (T) hibernateTemplate.execute(new HibernateCallback() {

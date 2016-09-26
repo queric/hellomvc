@@ -27,8 +27,11 @@ public class NewsService {
     public List<News> findAll(){
         //Map<String,Object> params=new HashMap<String, Object>();
         //params.put("newsId",1);
-        ConditionOrSet conditionOrSet=ConditionFactory.or()
-                .put(ConditionFactory.greaterThan("newsId",1)).put(ConditionFactory.lessOrEqual("newsId",5));
-        return  newsDao.findByProperties(conditionOrSet);
+        ConditionSet conditionAndSet=ConditionFactory.and()
+                .put(ConditionFactory.notEqual("newsId",1)).put(ConditionFactory.notEqual("newsId",5));
+        ConditionSet conditionAndSet2=ConditionFactory.or()
+                .put(ConditionFactory.notEqual("newsId",2)).put(ConditionFactory.notEqual("newsId",3));
+        conditionAndSet.put(conditionAndSet2);
+        return  newsDao.findByProperties(conditionAndSet);
     }
 }

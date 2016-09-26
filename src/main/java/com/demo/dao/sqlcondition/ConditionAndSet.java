@@ -7,7 +7,7 @@ import org.springframework.util.Assert;
  * “与”关系的ConditionSet
  *
  */
-public class ConditionAndSet extends ConditionSet<ConditionAndSet> {
+public class ConditionAndSet extends ConditionSet {
 
     private static final long serialVersionUID = -7785215850623407374L;
 
@@ -30,13 +30,19 @@ public class ConditionAndSet extends ConditionSet<ConditionAndSet> {
     }
 
     /**
-     * 构造函数
+     * 构造函数，创建一个空的ConditionAndSet
      */
     public ConditionAndSet() {
         super();
     }
     /**
-     * 构造函数，构建一个条件
+     * 构造函数,创建一个带有CompareCondtion条件的ConditionAndSet
+     */
+    public ConditionAndSet(CompareCondition compareCondition) {
+        super(compareCondition);
+    }
+    /**
+     * 构造函数，构造函数,构建一个带有“属性名等于属性值”条件的ConditionAndSet
      * @param key
      * @param value
      */
