@@ -23,11 +23,13 @@ public class UserService {
     public List<User> findAll(PageBean... pager){
         List<OrderCondition> order=new ArrayList<OrderCondition>();
         DescOrder descOrder=new DescOrder("id");
-        order.add(0, descOrder);
+        order.add(new AscOrder("username"));
+        order.add(descOrder);
+
 
 
         ConditionOrSet conditionOrSet=new ConditionOrSet("21",1);
-        return userDao.findByProperties(conditionOrSet,order,pager);
+        return userDao.findByProperties(null,order,pager);
     }
     public void add(User user){
         userDao.save(user);

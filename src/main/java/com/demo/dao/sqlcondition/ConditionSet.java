@@ -2,11 +2,7 @@ package com.demo.dao.sqlcondition;
 
 import org.springframework.util.Assert;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 
 /**
@@ -16,7 +12,8 @@ import java.util.Set;
 public abstract class ConditionSet {
 
     private static final long serialVersionUID = -110803228763256709L;
-    private Set<Object> values = new HashSet<Object>();
+    private List<Object> values=new ArrayList<Object>();  //从Set改成List使条件按put顺序来
+    //private Set<Object> values = new HashSet<Object>();
     /**
      * groupBy属性列
      */
@@ -62,7 +59,7 @@ public abstract class ConditionSet {
      * @return
      */
     public final ConditionSet put(CompareCondition compareCondition){
-        Assert.notNull(compareCondition, "添加CompareCondition类型不能为null");
+        Assert.notNull(compareCondition, "待添加的CompareCondition类型不能为null");
         this.addCompareCondition(compareCondition);
         return this;
     }
@@ -73,7 +70,7 @@ public abstract class ConditionSet {
      * @return
      */
     public final ConditionSet put(ConditionSet conditionSet){
-        Assert.notNull(conditionSet, "添加ConditionSet类型不能为null");
+        Assert.notNull(conditionSet, "待添加的ConditionSet类型不能为null");
         this.addConditionSet(conditionSet);
         return this;
     }
@@ -107,7 +104,7 @@ public abstract class ConditionSet {
      * 返回所有的集合中的对象信息。普通的列与值通过equal条件返回
      * @return
      */
-    public Set<Object> getValues() {
+    public List<Object> getValues() {
         return this.values;
         
     }

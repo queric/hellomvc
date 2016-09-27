@@ -49,7 +49,7 @@ public class News {
         this.uploadTime = uploadTime;
     }
 
-    @ManyToOne(targetEntity = NewsCatgory.class)
+    @ManyToOne(targetEntity = NewsCatgory.class, cascade = CascadeType.ALL)
     @JoinColumn( name = "catgoryId", referencedColumnName = "catgoryId")
     public NewsCatgory getNewsCatgory() {
         return newsCatgory;

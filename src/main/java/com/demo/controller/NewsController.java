@@ -27,7 +27,9 @@ public class NewsController {
     public ModelAndView get(){
         ModelAndView mav=new ModelAndView("newsList");
         List<News> newsList=newsService.findAll();
-        mav.addObject("test",newsList);
+        mav.addObject("newsList",newsList);
+        List<NewsCatgory> newsCatgories=newsCatgoryService.findAll();
+        mav.addObject("catgories",newsCatgories);
         return mav;
     }
     @RequestMapping(value = "/add",method = RequestMethod.GET)
