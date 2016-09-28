@@ -4,12 +4,16 @@ import com.demo.entity.News;
 import com.demo.entity.NewsCatgory;
 import com.demo.service.NewsCatgoryService;
 import com.demo.service.NewsService;
+import com.demo.util.PageBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
 
@@ -23,10 +27,15 @@ public class NewsController {
     private NewsService newsService;
     @Autowired
     private NewsCatgoryService newsCatgoryService;
-    @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView get(){
+    @RequestMapping( value = "/{page}", method = RequestMethod.GET)
+    public ModelAndView get(@PathVariable Integer page, HttpServletRequest request){
         ModelAndView mav=new ModelAndView("newsList");
-        List<News> newsList=newsService.findAll();
+        String pageSize = request.getParameter("pageSize");
+        if (pageSize == null){
+            pageSize = "10";
+        }
+        PageBean pager=new PageBean(page, Integer.valueOf(pageSize));
+        List<News> newsList=newsService.findAll(pager);
         mav.addObject("newsList",newsList);
         List<NewsCatgory> newsCatgories=newsCatgoryService.findAll();
         mav.addObject("catgories",newsCatgories);

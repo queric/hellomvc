@@ -17,6 +17,12 @@ import java.util.List;
 public class UserService {
     @Autowired
     private UserDao userDao;
+    public User findById(Integer id){
+        return userDao.findById(id);
+    }
+    public List<User> find(User user){
+        return userDao.findByExample(user);
+    }
     public void save(User user){
         userDao.save(user);
     }
@@ -34,7 +40,6 @@ public class UserService {
     public void add(User user){
         userDao.save(user);
     }
-
     public void delete(User user) {
         userDao.delete(user);
     }

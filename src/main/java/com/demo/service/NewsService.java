@@ -3,6 +3,7 @@ package com.demo.service;
 import com.demo.dao.NewsDao;
 import com.demo.dao.sqlcondition.*;
 import com.demo.entity.News;
+import com.demo.util.PageBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +23,7 @@ public class NewsService {
     public void save(News news){
         newsDao.save(news);
     }
-    public List<News> findAll(){
+    public List<News> findAll(PageBean pager){
         //Map<String,Object> params=new HashMap<String, Object>();
         //params.put("newsId",1);
 
@@ -33,7 +34,6 @@ public class NewsService {
 //        conditionAndSet.put(conditionAndSet2);
         List<OrderCondition> order=new ArrayList<OrderCondition>();
         //order.add(ConditionFactory.orderByDesc("catgoryId"));
-        List x=newsDao.queryByHQL("select news.* from News as news join news.newsCatgory as c order by c.catgoryId desc",null);
-        return  newsDao.queryByHQL("from News as news join news.newsCatgory as c order by c.catgoryId desc",null);
+        return  newsDao.queryByHQL("from News as news join fetch news.newsCatgory order by news.newsCatgory.catgoryId asc,news.newsId asc",null,pager);
     }
 }
