@@ -34,6 +34,6 @@ public class NewsService {
 //        conditionAndSet.put(conditionAndSet2);
         List<OrderCondition> order=new ArrayList<OrderCondition>();
         //order.add(ConditionFactory.orderByDesc("catgoryId"));
-        return  newsDao.queryByHQL("from News as news join fetch news.newsCatgory order by news.newsCatgory.catgoryId asc,news.newsId asc",null,pager);
+        return  newsDao.queryByHQL("from News as news order by news.newsCatgory.catgoryId asc,news.newsId asc",null,pager);
     }
 }
