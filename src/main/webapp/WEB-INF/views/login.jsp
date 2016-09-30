@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--Created by lwp on 2016/7/14--%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -161,5 +162,6 @@
         </div>
     </div>
 </div>
+<c:out value="${script}" escapeXml="false" />
 </body>
 </html>

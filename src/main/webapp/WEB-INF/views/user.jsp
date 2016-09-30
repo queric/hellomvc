@@ -10,10 +10,14 @@
 </head>
 <body>
     <table>
-        <thead><tr><th>编号ID</th><th>用户名</th><th>密码</th><th>操作</th></tr></thead>
+        <thead><tr><th>编号ID</th><th>角色</th><th>用户名</th><th>密码</th><th>操作</th></tr></thead>
         <tbody>
         <c:forEach var="user" items="${users}">
-            <tr><td>${user.id}</td><td>${user.username}</td><td>${user.password}</td><td><a href="/user/delete/${user.id}">删除</a> </td></tr>
+            <tr><td>${user.userId}</td><td>
+                <c:forEach var="role" items="${user.roles}">
+                    ${role.roleId}:${role.roleName},
+                </c:forEach>
+            </td><td>${user.username}</td><td>${user.password}</td><td><a href="/user/delete/${user.userId}">删除</a> </td></tr>
         </c:forEach>
         </tbody>
     </table>

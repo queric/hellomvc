@@ -55,7 +55,7 @@ public class UserController {
     @RequestMapping(value = "/delete/{id}",method = RequestMethod.GET)
     public String deleteUser(@PathVariable Integer id){
         User user=new User();
-        user.setId(id);
+        user.setUserId(id);
         userService.delete(user);
         return "redirect:/user";
     }
