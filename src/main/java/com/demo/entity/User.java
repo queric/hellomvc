@@ -35,7 +35,8 @@ public class User {
     }
 
     @ManyToMany(targetEntity = Role.class)
-    @JoinTable(name = "userRolePk", joinColumns = {@JoinColumn(name = "userId")},inverseJoinColumns = {@JoinColumn(name = "roleId")})
+    @JoinTable(name = "userRolePk",
+              joinColumns = {@JoinColumn(name = "userId")}, inverseJoinColumns = {@JoinColumn(name = "roleId")})
     @OrderBy("roleId")
     public Set<Role> getRoles() {
         return roles;
@@ -45,8 +46,9 @@ public class User {
         this.roles = roles;
     }
 
-    @ManyToMany
-    @JoinTable(name = "userDepartmentPk", joinColumns = {@JoinColumn(name = "userId")}, inverseJoinColumns = {@JoinColumn(name = "deptId")})
+    @ManyToMany(targetEntity = Department.class)
+    @JoinTable(name = "userDepartmentPk",
+              joinColumns = {@JoinColumn(name = "userId")}, inverseJoinColumns = {@JoinColumn(name = "deptId")})
     public Set<Department> getDeparts() {
         return departs;
     }

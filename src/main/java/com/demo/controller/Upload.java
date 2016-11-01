@@ -16,14 +16,13 @@ import java.io.IOException;
  */
 @Controller
 public class Upload {
-
     @RequestMapping(value = "/upload",method = RequestMethod.GET)
     public String index(){
             return "upload";
     }
     @ResponseBody
     @RequestMapping(value = "/upload",method = RequestMethod.POST)
-    public String  upload(MultipartFile file, HttpServletRequest request, ModelMap model){
+    public String upload(MultipartFile file, HttpServletRequest request, ModelMap model){
         System.out.println("开始");
         String path = request.getSession().getServletContext().getRealPath("upload");
 
