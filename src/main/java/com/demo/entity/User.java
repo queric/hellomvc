@@ -45,8 +45,9 @@ public class User {
         this.roles = roles;
     }
 
-    @ManyToMany
+    @ManyToMany(targetEntity = Department.class)
     @JoinTable(name = "userDepartmentPk", joinColumns = {@JoinColumn(name = "userId")}, inverseJoinColumns = {@JoinColumn(name = "deptId")})
+    @OrderBy("deptId")
     public Set<Department> getDeparts() {
         return departs;
     }
