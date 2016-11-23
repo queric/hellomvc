@@ -5,6 +5,8 @@ import com.demo.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by Queric on 2016/11/21.
  */
@@ -13,6 +15,9 @@ public class ProductService {
     @Autowired
     private ProductDao productDao;
 
+    public List<Product> findAll(){
+        return productDao.findAll();
+    }
     public void  add(Product product){
         productDao.save(product);
     }

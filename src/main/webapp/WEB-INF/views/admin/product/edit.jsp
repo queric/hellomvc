@@ -2,7 +2,7 @@
   Author: Queric  Date: 2016/11/21 13:53
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -63,22 +63,13 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="help-block help-block-error" style="color: #ffffff;">
-                            <div class="error-summary" style="display: none">
-                                <p>请修复以下错误</p>
-                                <ul></ul>
-                            </div>
-                        </div>
                         <div class="form-group field-base-cert_type">
                             <label class="control-label col-sm-2" for="CatgoryID">品种类别</label>
                             <div class="col-sm-8">
-                                <select name="CatgoryID" id="CatgoryID" class="form-control">
-                                    <option value="2">本期产品</option>
-                                    <option value="4">常规</option>
-                                    <option value="8">下架产品</option>
-                                    <option value="12">1231232</option>
-                                    <option value="14">333355</option>
-
+                                <select name="categoryId" id="categoryId" class="form-control">
+                                    <c:forEach var="category" items="categories">
+                                        <option value="${category.categoryId}">${category.categoryName}</option>
+                                    </c:forEach>
                                 </select>
                             </div>
                         </div>

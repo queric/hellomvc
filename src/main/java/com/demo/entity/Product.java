@@ -8,7 +8,7 @@ import java.util.Date;
 /**
  * Created by Queric on 2016/11/21.
  */
-@Entity
+@Entity(name = "product1")
 public class Product {
     private int productId;
     private String productName;
@@ -86,8 +86,8 @@ public class Product {
         this.updateTime = updateTime;
     }
 
-    @ManyToOne(targetEntity = ProductCategory.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = "categoryId")
+    @ManyToOne(targetEntity = ProductCategory.class)
+    @JoinColumn(name = "categoryId", foreignKey = @ForeignKey(name = "null"))
     public ProductCategory getCategory() {
         return category;
     }
