@@ -8,7 +8,7 @@ import java.util.Date;
 /**
  * Created by Queric on 2016/11/21.
  */
-@Entity(name = "product1")
+@Entity
 public class Product {
     private int productId;
     private String productName;

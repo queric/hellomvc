@@ -10,7 +10,7 @@ import javax.persistence.Id;
 /**
  * Created by Queric on 2016/11/21.
  */
-@Entity(name = "productcat1")
+@Entity
 public class ProductCategory {
     private int categoryId;
     private String categoryName;
