@@ -31,7 +31,7 @@
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
     <aop:config>
-        <!--service包及其子包的所有方法-->
+        <!--dao.impl的所有方法-->
         <aop:pointcut id="bussinessService" expression="execution(* com.demo.dao.impl..*.*(..))" />
         <aop:advisor pointcut-ref="bussinessService" advice-ref="txAdvice" />
     </aop:config>

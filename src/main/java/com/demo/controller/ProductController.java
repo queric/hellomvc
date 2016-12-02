@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -44,6 +45,12 @@ public class ProductController {
     public String addProduct(HttpServletRequest request) {
         Product product=new Product();
         product.setProductName(request.getParameter("productName"));
+        product.setPicPath("test");
+        product.setRecommendLevel(5);
+        product.setRemark("er");
+        product.setSpec("斤/份");
+        product.setStock(100);
+        product.setUpdateTime(new Date());
         product.setCategory(productCategoryService.findById(Integer.parseInt(request.getParameter("categoryId"))));
         productService.add(product);
         return "redirect:/user";
