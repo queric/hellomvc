@@ -36,7 +36,7 @@ public class UserService {
         order.add(descOrder);
 
 
-        logger.debug("this message is from log4j");
+        logger.info("this message is from log4j");
         ConditionOrSet conditionOrSet=new ConditionOrSet("21",1);
         return userDao.findByProperties(null,order,pager);
     }
