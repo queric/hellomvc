@@ -1,59 +1,14 @@
-<%--
-  Author: Queric  Date: 2016/11/21 13:53
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>
-    商品信息-猎鲜订单管理系统
-</title><meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- Bootstrap -->
-    <link type="text/css" rel="stylesheet" href="/static/css/bootstrap.min.css" /><link type="text/css" rel="stylesheet" href="/static/css/font-awesome.min.css" /><link type="text/css" rel="stylesheet" href="/static/css/iCheck_square_blue.css" /><link type="text/css" rel="stylesheet" href="/static/css/admin/main.css" /><link type="text/css" rel="stylesheet" href="/static/css/admin/default.css" />
-    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
-    <script type="text/javascript" src="/static/js/admin_common.js"></script>
+<head>
+<jsp:include page="/WEB-INF/views/admin/headset.jsp"></jsp:include>
 </head>
+
 <body>
-
-<!--顶部导航begin-->
-<div class="top-navbar navbar navbar-default" style="margin-bottom: 0;" role="navigation">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">导航栏</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-        <a href="/main.aspx"><span class="navbar-brand"><span class="glyphicon glyphicon-home"></span>&nbsp;猎鲜订单管理系统</span></a>
-    </div>
-
-    <div class="navbar-collapse collapse" style="height: 1px;">
-        <ul id="main-menu" class="nav navbar-nav navbar-right">
-            <!--左侧导航预留位置-->
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <span class="glyphicon glyphicon-user" style="position:relative;top: 3px;"></span>
-                    admin  <i class="glyphicon glyphicon-triangle-bottom"></i>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a href="#">帮助文档</a></li>
-                    <li><a href="/repasswd.aspx">修改密码</a></li>
-                    <li class="divider"></li>
-                    <li><a tabindex="-1" href="/logout.aspx">退出</a></li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-</div>
-<!--顶部导航end-->
-<!--左侧边栏begin-->
-<div class="sidebar-nav">
-    <ul id="nav-items"></ul>
-</div>
-<!--左侧边栏end-->
+<jsp:include page="/WEB-INF/views/admin/header.jsp"></jsp:include>
 <div class="content" style="background: #f9f9f9;">
     <form method="post" action="/admin/product/add" id="form2" class="form-horizontal form-validation" enctype="multipart/form-data">
         <section class="panel panel-default">
@@ -67,16 +22,16 @@
                             <label class="control-label col-sm-2" for="CatgoryID">品种类别</label>
                             <div class="col-sm-8">
                                 <select name="categoryId" id="categoryId" class="form-control">
-                                    <c:forEach var="category" items="categories">
+                                    <c:forEach var="category" items="${categories}">
                                         <option value="${category.categoryId}">${category.categoryName}</option>
                                     </c:forEach>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group required">
-                            <label class="control-label col-sm-2" for="ProductName">商品名称</label>
+                            <label class="control-label col-sm-2" for="productName">商品名称</label>
                             <div class="col-sm-8">
-                                <input name="ProductName" type="text" id="ProductName" class="form-control" />
+                                <input name="productName" type="text" id="productName" class="form-control" />
                                 <span id="Label1"></span>
                             </div>
                         </div>
@@ -179,22 +134,6 @@
         </section>
     </form>
 </div>
-
-<footer>
-    <hr />
-    <p class="pull-right">© 2016 Powered By 猎鲜网 ,All Rights Reserved.</p>
-</footer>
-<script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
-<!--[if lte IE 9]>
-<script type="text/javascript" src="/static/js/html5shiv.min.js"></script>
-<script type="text/javascript" src="/static/js/respond.min.js"></script>
-<script type="text/javascript" src="/static/js/jquery.placeholder.min.js"></script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('input[type="text"]').placeholder();
-    })
-</script>
-<![endif]-->
-
+<jsp:include page="/WEB-INF/views/admin/footer.jsp"></jsp:include>
 </body>
 </html>
