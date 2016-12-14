@@ -38,13 +38,13 @@
                         <div class="form-group field-base-user_allow_chgpass">
                             <label class="control-label col-sm-2" for="Memo">商品备注</label>
                             <div class="col-sm-8">
-                                <input name="Memo" type="text" id="Memo" class="form-control" />
+                                <input name="remark" type="text" id="Memo" class="form-control" />
                             </div>
                         </div>
                         <div class="form-group field-base-user_real_name">
                             <label class="control-label col-sm-2" for="InStock">库存数量</label>
                             <div class="col-sm-8">
-                                <input name="InStock" type="text" id="InStock" class="form-control" />
+                                <input name="stock" type="text" id="InStock" class="form-control" />
                                 <div class="help-block ">
                                     <span id="RegularExpressionValidator1" style="color:Red;visibility:hidden;">只能输入数字</span>
                                 </div>
@@ -73,7 +73,7 @@
                             <div class="col-sm-8">
                                 <div class="row">
                                     <div class="col-sm-2">
-                                        <input name="size" type="text" value="0" id="size" class="form-control" />
+                                        <input name="spec" type="text" value="0" id="size" class="form-control" />
                                     </div>
                                     <div class="col-sm-10">
                                         <span id="sizetype" class="form-control" style="border:0;"><input id="sizetype_0" type="radio" name="sizetype" value="斤/份" checked="checked" /><label for="sizetype_0"> 斤/份       </label><input id="sizetype_1" type="radio" name="sizetype" value="个/份" /><label for="sizetype_1"> 个/份</label></span>
@@ -87,8 +87,8 @@
                         <div class="form-group field-base-user_expire_time">
                             <label class="control-label col-sm-2">推荐指数</label>
                             <div class="col-sm-8">
-                                <select name="Recommand" id="Recommand" class="form-control">
-                                    <option selected="selected" value="1">★</option>
+                                <select name="recommendLevel" id="Recommand" class="form-control">
+                                    <option value="1">★</option>
                                     <option value="2">★★</option>
                                     <option value="3">★★★</option>
                                     <option value="4">★★★★</option>
@@ -97,34 +97,15 @@
                                 </select>
                             </div>
                         </div>
-
-                        <div class="form-group field-base-user_expire_time" style="display:none;">
-                            <label class="control-label col-sm-2" for="PriceAgent">代理价</label>
-                            <div class="col-sm-8">
-                                <input name="PriceAgent" type="text" value="0" id="PriceAgent" class="form-control" />
-                                <div class="help-block ">
-                                    <span id="RegularExpressionValidator3" style="color:Red;visibility:hidden;">只能输入价格</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group field-base-user_expire_time"  style="display:none;">
-                            <label class="control-label col-sm-2" for="PricePartner">合作伙伴价</label>
-                            <div class="col-sm-8">
-                                <input name="PricePartner" type="text" value="0" id="PricePartner" class="form-control" />
-                                <div class="help-block ">
-                                    <span id="RegularExpressionValidator4" style="color:Red;visibility:hidden;">只能输入价格</span>
-                                </div>
-                            </div>
-                        </div>
                         <div class="form-group field-base-max_online_num">
                             <label class="control-label col-sm-2" for="base-max_online_num">最后更新时间</label>
                             <div class="col-sm-8">
 
                             </div>
                         </div>
-                        <div class="form-group field- required">
+                        <div class="form-group field-required">
                             <div class="col-sm-10 col-sm-offset-2">
-                                <input type="submit" name="submit" value="保存" onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;submit&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, false))" id="submit" class="btn btn-success" />
+                                <input type="submit" name="submit" value="保存" id="submit" class="btn btn-success" />
                                 <a class="btn btn-default" href="ProductList.aspx">列表</a>
                             </div>
                         </div>

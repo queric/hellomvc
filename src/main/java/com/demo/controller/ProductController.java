@@ -4,11 +4,11 @@ import com.demo.entity.Product;
 import com.demo.entity.ProductCategory;
 import com.demo.service.ProductCategoryService;
 import com.demo.service.ProductService;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -42,17 +42,8 @@ public class ProductController {
     }
 
     @RequestMapping(value = "add",method = RequestMethod.POST)
-    public String addProduct(HttpServletRequest request) {
-        Product product=new Product();
-        product.setProductName(request.getParameter("productName"));
-        product.setPicPath("test");
-        product.setRecommendLevel(5);
-        product.setRemark("er");
-        product.setSpec("斤/份");
-        product.setStock(100);
-        product.setUpdateTime(new Date());
-        product.setCategory(productCategoryService.findById(Integer.parseInt(request.getParameter("categoryId"))));
-        productService.add(product);
-        return "redirect:/user";
+    public void addProduct(MultipartFile file, Product product) {
+        System.out.println(product.getProductName());
+        System.out.println(product.getRecommendLevel());
     }
 }

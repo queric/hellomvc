@@ -1,6 +1,6 @@
 ﻿<footer>
     <hr />
-    <p class="pull-right">© 2016 Powered By 猎鲜网 ,All Rights Reserved.</p>
+    <p class="pull-right">${config_system_copyright}</p>
 </footer>
 <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
 <!--[if lte IE 9]>

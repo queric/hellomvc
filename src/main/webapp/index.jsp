@@ -1,4 +1,5 @@
-<%@ page import="java.util.*" %><%--07/14 by lwp--%>
+<%@ page import="java.util.*" %>
+<%@ page import="com.demo.test.Hello" %><%--07/14 by lwp--%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
@@ -8,6 +9,6 @@
     <title></title>
 </head>
 <body>
-    <%=request.getContextPath()+request.getServletPath()%>
+
 </body>
 </html>

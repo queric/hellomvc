@@ -15,7 +15,7 @@ public class Product {
     private String remark;
     private int stock;
     private String picPath;
-    private String spec;
+    private String spec;//规格
     private int recommendLevel;
     private Date updateTime;
     private ProductCategory category;
