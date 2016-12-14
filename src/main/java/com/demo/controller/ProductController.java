@@ -8,10 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -42,8 +45,15 @@ public class ProductController {
     }
 
     @RequestMapping(value = "add",method = RequestMethod.POST)
-    public void addProduct(MultipartFile file, Product product) {
+    public void addProduct(@RequestParam(value = "file", required = false) MultipartFile file, Product product, HttpServletRequest request) throws IOException {
         System.out.println(product.getProductName());
         System.out.println(product.getRecommendLevel());
+        String path = request.getSession().getServletContext().getRealPath("upload");
+        String filename=file.getOriginalFilename();
+        File targetFile=new File(path,filename);
+        if (!targetFile.exists()){
+            targetFile.mkdirs();
+        }
+        file.transferTo(targetFile);
     }
 }

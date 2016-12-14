@@ -37,8 +37,6 @@ public class ControllerAspect {
             Map.Entry entry=(Map.Entry)it.next();
             String key = entry.getKey().toString();
             Object value = entry.getValue();
-            System.out.println(key);
-            System.out.println(value);
             mav.addObject(key,value);
         }
     }

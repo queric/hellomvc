@@ -55,7 +55,7 @@
                             <div class="col-sm-8">
                                 <div class="col-sm-12"><img src="#" id="ProPic" width="400" style="display:none;" /></div>
                                 <div class="col-sm-12" style="padding-left:0 !important;">
-                                    <input type="file" name="FileUpload1" id="FileUpload1" />
+                                    <input type="file" name="file" id="FileUpload1" />
                                 </div>
                             </div>
                         </div>
