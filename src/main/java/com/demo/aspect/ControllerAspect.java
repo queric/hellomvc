@@ -1,16 +1,13 @@
 package com.demo.aspect;
 
-import com.demo.entity.Role;
-import org.aspectj.lang.JoinPoint;
+import com.demo.util.PropertiesFileReader;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.*;
-import java.net.URL;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
@@ -28,10 +25,7 @@ public class ControllerAspect {
     @AfterReturning(pointcut = "pointCutMethod()", returning = "obj")
     public void doAfterReturning(Object obj) throws IOException{
         ModelAndView mav=(ModelAndView)obj;
-        Properties properties=new Properties();
-        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("config.system.properties");
-        BufferedReader bf = new BufferedReader(new  InputStreamReader(inputStream, "UTF-8"));
-        properties.load(bf);
+        Properties properties=new PropertiesFileReader("config.system.properties").getProperties();
         Iterator it=properties.entrySet().iterator();
         while(it.hasNext()){
             Map.Entry entry=(Map.Entry)it.next();

@@ -1,8 +1,11 @@
 package com.demo.entity;
 
+import com.sun.istack.internal.NotNull;
+import com.sun.istack.internal.Nullable;
 import org.hibernate.annotations.GeneratorType;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.Date;
 
 /**
@@ -15,7 +18,9 @@ public class Product {
     private String remark;
     private int stock;
     private String picPath;
-    private String spec;//规格
+    private String special;//规格
+    private String specialUnit;//规格单位
+    private Integer priceCents;
     private int recommendLevel;
     private Date updateTime;
     private ProductCategory category;
@@ -62,12 +67,28 @@ public class Product {
         this.picPath = picPath;
     }
 
-    public String getSpec() {
-        return spec;
+    public String getSpecial() {
+        return special;
     }
 
-    public void setSpec(String spec) {
-        this.spec = spec;
+    public void setSpecial(String special) {
+        this.special = special;
+    }
+
+    public String getSpecialUnit() {
+        return specialUnit;
+    }
+
+    public void setSpecialUnit(String specialUnit) {
+        this.specialUnit = specialUnit;
+    }
+
+    public Integer getPriceCents() {
+        return priceCents/100;
+    }
+
+    public void setPriceCents(Float price) {
+        this.priceCents = (int)(price*100);
     }
 
     public int getRecommendLevel() {
