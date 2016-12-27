@@ -50,12 +50,10 @@ public class ProductController {
     }
 
     @RequestMapping(value = "add",method = RequestMethod.POST)
-    public ModelAndView addProduct(@RequestParam(value = "file", required = true) MultipartFile file, Product product, HttpServletRequest request,ModelAndView view) throws IOException {
+    public ModelAndView addProduct(@RequestParam(value = "file", required = true) MultipartFile file, Product product, HttpServletRequest request) throws IOException {
         String categoryId = request.getParameter("categoryId");
         if (categoryId == null) {
-            view.addObject("hello","<script>alert(1)</script>");
-            return view;
-            //return new ModelAndView("message","script","alert('请选择分类！');history.go(-1)");
+            return new ModelAndView("message","script","alert('请选择分类！');history.go(-1)");
         }
         ProductCategory productCategory = productCategoryService.findById(Integer.parseInt(categoryId));
         if (productCategory == null) {

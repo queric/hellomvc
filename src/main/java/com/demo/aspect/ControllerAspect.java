@@ -25,6 +25,9 @@ public class ControllerAspect {
     @AfterReturning(pointcut = "pointCutMethod()", returning = "obj")
     public void doAfterReturning(Object obj) throws IOException{
         ModelAndView mav=(ModelAndView)obj;
+        String viewName=mav.getViewName();
+        System.out.println(viewName);
+        if (viewName.startsWith("redirect:")){return;}
         Properties properties=new PropertiesFileReader("config.system.properties").getProperties();
         Iterator it=properties.entrySet().iterator();
         while(it.hasNext()){

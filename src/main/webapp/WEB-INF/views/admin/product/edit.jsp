@@ -50,7 +50,7 @@
                         <div class="form-group field-base-user_available">
                             <label class="control-label col-sm-2">商品图片</label>
                             <div class="col-sm-8">
-                                <div class="col-sm-12"><img src="#" id="ProPic" width="400" style="display:none;" /></div>
+                                <div class="col-sm-12"><img src="" id="ProPic" width="400" style="display:none;" /></div>
                                 <div class="col-sm-12" style="padding-left:0 !important;">
                                     <input type="file" name="file" id="FileUpload1" />
                                 </div>
