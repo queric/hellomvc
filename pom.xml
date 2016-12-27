@@ -47,9 +47,9 @@
       <version>2.3</version>
     </dependency>
     <dependency>
-      <groupId>aspectj</groupId>
+      <groupId>org.aspectj</groupId>
       <artifactId>aspectjweaver</artifactId>
-      <version>1.5.4</version>
+      <version>1.8.9</version>
     </dependency>
     <dependency>
       <groupId>commons-fileupload</groupId>
@@ -75,6 +75,21 @@
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-log4j12</artifactId>
       <version>1.7.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.yaml</groupId>
+      <artifactId>snakeyaml</artifactId>
+      <version>1.17</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.validation</groupId>
+      <artifactId>validation-api</artifactId>
+      <version>1.1.0.Final</version>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-validator</artifactId>
+      <version>5.1.0.Final</version>
     </dependency>
   </dependencies>
   <build>

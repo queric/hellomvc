@@ -7,7 +7,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a href="/main.aspx"><span class="navbar-brand"><span class="glyphicon glyphicon-home"></span>&nbsp;猎鲜订单管理系统</span></a>
+        <a href="/main.aspx"><span class="navbar-brand"><span class="glyphicon glyphicon-home"></span>&nbsp;${config_system_name}</span></a>
     </div>
 
     <div class="navbar-collapse collapse" style="height: 1px;">
