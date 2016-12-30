@@ -18,7 +18,7 @@ import java.util.Properties;
 @Aspect
 @Component
 public class ControllerAspect {
-    @Pointcut("execution(public org.springframework.web.servlet.ModelAndView com.demo.controller.*.*(..))")
+    @Pointcut("execution(protected org.springframework.web.servlet.ModelAndView org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(..))")
     private void pointCutMethod(){
     }
 

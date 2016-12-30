@@ -1,4 +1,5 @@
-﻿<footer>
+﻿<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<footer>
     <hr />
     <p class="pull-right">${config_system_copyright}</p>
 </footer>
@@ -13,3 +14,8 @@ $('input[type="text"]').placeholder();
 })
 </script>
 <![endif]-->
+<c:if test="${script!=null}">
+<script type="text/javascript">
+    <c:out value="${script}" escapeXml="false" />
+</script>
+</c:if>

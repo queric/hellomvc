@@ -31,7 +31,7 @@
                         <div class="form-group required">
                             <label class="control-label col-sm-2" for="productName">商品名称</label>
                             <div class="col-sm-8">
-                                <input name="productName" type="text" id="productName" class="form-control" />
+                                <input name="productName" value="${product.productName}" type="text" id="productName" class="form-control" />
                                 <span id="Label1"></span>
                             </div>
                         </div>
