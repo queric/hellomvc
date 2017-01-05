@@ -19,8 +19,8 @@ import java.util.List;
 @RequestMapping(value = "/test")
 public class TestValid {
     @RequestMapping(value = "test",method = RequestMethod.GET)
-    public ModelAndView getView(){
-        return new ModelAndView("/test/test");
+    public String getView(){
+        return "/test/test";
     }
     @RequestMapping(value = "test",method = RequestMethod.POST)
     public String doPost(Model model, @Valid User user, BindingResult result) {
