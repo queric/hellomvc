@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title></title>
+    <jsp:include page="/WEB-INF/views/admin/headset.jsp"></jsp:include>
 </head>
 <body>
     <form action="/test/test" method="post">
@@ -11,5 +11,6 @@
         <input type="password" name="password" />
         <input type="submit" value="submit" />
     </form>
+    <jsp:include page="/WEB-INF/views/admin/footer.jsp"></jsp:include>
 </body>
 </html>

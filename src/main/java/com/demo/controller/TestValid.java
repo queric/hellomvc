@@ -2,6 +2,7 @@ package com.demo.controller;
 
 import com.demo.valid.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,17 +19,21 @@ import java.util.List;
 @RequestMapping(value = "/test")
 public class TestValid {
     @RequestMapping(value = "test",method = RequestMethod.GET)
-    public ModelAndView getView(){
-        return new ModelAndView("/test/test");
+    public String getView(){
+        return "/test/test";
     }
     @RequestMapping(value = "test",method = RequestMethod.POST)
-    public ModelAndView doPost(@Valid User user, BindingResult result){
-        if (result.hasErrors()){
+    public String doPost(Model model, @Valid User user, BindingResult result) {
+        if (result.hasErrors()) {
             List<ObjectError> errorList = result.getAllErrors();
-            for(ObjectError error : errorList){
-                System.out.println(error.getDefaultMessage());
+            for (ObjectError error : errorList) {
+                model.addAttribute("script","alert('"+error.getDefaultMessage()+"')");
+                break;
             }
+            return "/test/test";
         }
-        return new ModelAndView("redirect:/admin/product/add");
+        else {
+            return "/";
+        }
     }
 }
