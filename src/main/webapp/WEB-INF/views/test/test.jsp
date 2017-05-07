@@ -11,6 +11,7 @@
         <input type="password" name="password" />
         <input type="submit" value="submit" />
     </form>
+    <c:out value="${script}" escapeXml="false" />
     <jsp:include page="/WEB-INF/views/admin/footer.jsp"></jsp:include>
 </body>
 </html>

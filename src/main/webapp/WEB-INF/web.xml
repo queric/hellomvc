@@ -7,13 +7,13 @@
   <display-name>hello mvc</display-name>
 
   <welcome-file-list>
-      <welcome-file>/</welcome-file>
+      <welcome-file>/login</welcome-file>
   </welcome-file-list>
-  <!-- Log4j配置 -->
-  <context-param>
+  <!-- Log4j配置 不加入此配置log4j也会自动check for log4j.properties-->
+  <!--<context-param>
     <param-name>log4jConfigLocation</param-name>
-    <param-value>classpath:jdbc.properties</param-value>
-  </context-param>
+    <param-value>classpath:log4j.properties</param-value>
+  </context-param>-->
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
@@ -32,6 +32,17 @@
     <url-pattern>/</url-pattern>
   </servlet-mapping>
 
+  <!--<filter>
+    <filter-name>shiroFilter</filter-name>
+    <filter-class>
+      org.springframework.web.filter.DelegatingFilterProxy
+    </filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>shiroFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>-->
+
   <!--Hibernate lazy加载问题-->
   <filter>
     <filter-name>openSessionInView</filter-name>
@@ -41,6 +52,7 @@
     <filter-name>openSessionInView</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+
   <filter>
     <filter-name>encodingFilter</filter-name>
     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>

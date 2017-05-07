@@ -24,6 +24,7 @@ public class UserService {
         return userDao.findById(id);
     }
     public List<User> findByExample(User user){
+        logger.info("this message is from log4j");
         return userDao.findByExample(user);
     }
     public void save(User user){
