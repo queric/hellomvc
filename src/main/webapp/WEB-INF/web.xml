@@ -31,7 +31,14 @@
     <servlet-name>mvc-dispatcher</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
-
+  <servlet>
+    <servlet-name>testServlet</servlet-name>
+    <servlet-class>com.demo.test.Servlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>testServlet</servlet-name>
+    <url-pattern>/hello.do</url-pattern>
+  </servlet-mapping>
   <!--Hibernate lazy加载问题-->
   <filter>
     <filter-name>openSessionInView</filter-name>

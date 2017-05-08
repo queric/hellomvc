@@ -1,5 +1,5 @@
 <%@ page import="java.util.*" %>
-<%@ page import="com.demo.test.Hello" %><%--07/14 by lwp--%>
+<%@ page import="com.demo.test.TestWork" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
@@ -9,6 +9,10 @@
     <title></title>
 </head>
 <body>
-
+    <%
+        TestWork testWork=new TestWork();
+        testWork.hello();
+        testWork.suckit();
+    %>
 </body>
 </html>
