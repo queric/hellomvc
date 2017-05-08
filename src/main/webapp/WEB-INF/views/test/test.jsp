@@ -21,6 +21,7 @@
                 document.getElementById('example')
         )
     </script>
+    <c:out value="${script}" escapeXml="false" />
     <jsp:include page="/WEB-INF/views/admin/footer.jsp"></jsp:include>
 </body>
 </html>

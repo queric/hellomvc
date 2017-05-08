@@ -108,7 +108,7 @@ public class Product {
     }
 
     @ManyToOne(targetEntity = ProductCategory.class)
-    @JoinColumn(name = "categoryId", foreignKey = @ForeignKey(name = "null"))
+    @JoinColumn(name = "categoryId")
     public ProductCategory getCategory() {
         return category;
     }
